@@ -1,11 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EFCoreAssignment.Models
 {
     public class Node
     {
         [Key]
-        public int NodeId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int? NodeId { get; set; }
 
         [Required]
         [StringLength(100)]
@@ -28,6 +30,9 @@ namespace EFCoreAssignment.Models
 
         [StringLength(50)]
         public string LifeInsuranceClass { get; set; }
+
+        [StringLength(50)]
+        public string? NodeIdentifier { get; set; }
 
 
         public int SlaId { get; set; }

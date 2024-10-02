@@ -2,6 +2,7 @@
 using EFCoreAssignment.Models;
 using EFCoreAssignment.Models.DTOs;
 using EFCoreAssignment.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +10,8 @@ namespace EFCoreAssignment.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
+
     public class SlaController : ControllerBase
     {
         private readonly ApplicationDbContext _applicationDbContext;
@@ -20,7 +23,7 @@ namespace EFCoreAssignment.Controllers
         }
 
         [HttpGet]
-        [Route("index")]
+        [Route("getSlaList")]
         public async Task<ActionResult<ResponseModel<IEnumerable<Sla>>>> Index()
         {
             var allSlas = await _applicationDbContext.Slas.ToListAsync();

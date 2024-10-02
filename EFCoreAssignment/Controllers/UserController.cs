@@ -1,12 +1,15 @@
 ﻿using EFCoreAssignment.DataAccess;
 using EFCoreAssignment.Models;
 using EFCoreAssignment.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EFCoreAssignment.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
+
     public class UserController : ControllerBase
     {
         private readonly ApplicationDbContext _applicationDbContext;
@@ -18,6 +21,7 @@ namespace EFCoreAssignment.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [Route("login")]
         public async Task<ActionResult<ResponseModel<AuthResponse>>> Login([FromBody] UserLoginDTO loginDto)
         {

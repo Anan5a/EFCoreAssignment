@@ -1,6 +1,7 @@
 ﻿using EFCoreAssignment.DataAccess;
 using EFCoreAssignment.Models;
 using EFCoreAssignment.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +9,8 @@ namespace EFCoreAssignment.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
+
     public class MonitoringController : ControllerBase
     {
         private readonly ApplicationDbContext _applicationDbContext;
@@ -20,7 +23,7 @@ namespace EFCoreAssignment.Controllers
 
 
         [HttpGet]
-        [Route("index")]
+        [Route("getMonitoringList")]
         public async Task<ActionResult<ResponseModel<IEnumerable<Monitoring>>>> Index()
         {
             var allMonitoring = await _applicationDbContext.Monitorings.ToListAsync();

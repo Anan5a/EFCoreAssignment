@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EFCoreAssignment.Migrations
 {
     /// <inheritdoc />
-    public partial class AddDatabaseTablestoDb : Migration
+    public partial class InitialCreateDbTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -52,7 +52,7 @@ namespace EFCoreAssignment.Migrations
                 name: "Monitorings",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    MonitoringId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Alias = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Aggregate = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
@@ -72,7 +72,7 @@ namespace EFCoreAssignment.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Monitorings", x => x.Id);
+                    table.PrimaryKey("PK_Monitorings", x => x.MonitoringId);
                 });
 
             migrationBuilder.CreateTable(
@@ -88,14 +88,14 @@ namespace EFCoreAssignment.Migrations
                     NodeType = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     NodeSubType = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     LifeInsuranceClass = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    NodeIdentifier = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    NodeIdentifier = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    SlaId = table.Column<int>(type: "int", nullable: false),
                     PeriodicFormat = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     PeriodicFormatStartDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     TransactionFormat = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     TransactionFormatStartDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     TaskType = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     EmailTemplateId = table.Column<int>(type: "int", nullable: true),
-                    SlaId = table.Column<int>(type: "int", nullable: true),
                     Shifting = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     ProcessDuration = table.Column<int>(type: "int", nullable: true),
                     ContactId = table.Column<int>(type: "int", nullable: true),
@@ -116,7 +116,7 @@ namespace EFCoreAssignment.Migrations
                     SlaName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     SlaFrequencyTransaction = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SlaFrequencyPosition = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SlaAnniversary = table.Column<bool>(type: "bit", nullable: false),
+                    SlaAnniversary = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SlaExcludeWeekends = table.Column<bool>(type: "bit", nullable: false),
                     SlaReminderDays = table.Column<int>(type: "int", nullable: true),
                     SlaEscalationDays = table.Column<int>(type: "int", nullable: true),

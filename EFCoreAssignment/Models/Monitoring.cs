@@ -1,11 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EFCoreAssignment.Models
 {
     public class Monitoring
     {
         [Key]
-        public int Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int MonitoringId { get; set; }
 
         [StringLength(50)]
         public string Alias { get; set; }

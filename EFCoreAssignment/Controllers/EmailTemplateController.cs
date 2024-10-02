@@ -1,6 +1,7 @@
 ﻿using EFCoreAssignment.DataAccess;
 using EFCoreAssignment.Models;
 using EFCoreAssignment.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +9,8 @@ namespace EFCoreAssignment.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
+
     public class EmailTemplateController : ControllerBase
     {
         private readonly ApplicationDbContext _applicationDbContext;
@@ -19,7 +22,7 @@ namespace EFCoreAssignment.Controllers
         }
 
         [HttpGet]
-        [Route("index")]
+        [Route("getEmailTemplateList")]
         public async Task<ActionResult<ResponseModel<IEnumerable<EmailTemplate>>>> Index()
         {
             var allEmailTemplates = await _applicationDbContext.EmailTemplates.ToListAsync();

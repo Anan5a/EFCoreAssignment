@@ -1,11 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EFCoreAssignment.Models
 {
     public class Contact
     {
         [Key]
-        public int ContactId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int? ContactId { get; set; }
 
         [Required]
         [StringLength(50)]

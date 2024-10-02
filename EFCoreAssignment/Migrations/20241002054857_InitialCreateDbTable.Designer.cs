@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFCoreAssignment.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240929072545_AddDatabaseTablestoDb")]
-    partial class AddDatabaseTablestoDb
+    [Migration("20241002054857_InitialCreateDbTable")]
+    partial class InitialCreateDbTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,11 +27,11 @@ namespace EFCoreAssignment.Migrations
 
             modelBuilder.Entity("EFCoreAssignment.Models.Contact", b =>
                 {
-                    b.Property<int>("ContactId")
+                    b.Property<int?>("ContactId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ContactId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("ContactId"));
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -83,11 +83,11 @@ namespace EFCoreAssignment.Migrations
 
             modelBuilder.Entity("EFCoreAssignment.Models.EmailTemplate", b =>
                 {
-                    b.Property<int>("EmailTemplateId")
+                    b.Property<int?>("EmailTemplateId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmailTemplateId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("EmailTemplateId"));
 
                     b.Property<string>("EmailTemplateBody")
                         .IsRequired()
@@ -113,11 +113,11 @@ namespace EFCoreAssignment.Migrations
 
             modelBuilder.Entity("EFCoreAssignment.Models.Monitoring", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("MonitoringId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MonitoringId"));
 
                     b.Property<string>("Aggregate")
                         .IsRequired()
@@ -186,18 +186,18 @@ namespace EFCoreAssignment.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("Id");
+                    b.HasKey("MonitoringId");
 
                     b.ToTable("Monitorings");
                 });
 
             modelBuilder.Entity("EFCoreAssignment.Models.Node", b =>
                 {
-                    b.Property<int>("NodeId")
+                    b.Property<int?>("NodeId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NodeId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("NodeId"));
 
                     b.Property<string>("Aggregate")
                         .IsRequired()
@@ -227,9 +227,8 @@ namespace EFCoreAssignment.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("NodeIdentifier")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("NodeName")
                         .IsRequired()
@@ -267,7 +266,7 @@ namespace EFCoreAssignment.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int?>("SlaId")
+                    b.Property<int>("SlaId")
                         .HasColumnType("int");
 
                     b.Property<string>("TaskType")
@@ -290,17 +289,18 @@ namespace EFCoreAssignment.Migrations
 
             modelBuilder.Entity("EFCoreAssignment.Models.Sla", b =>
                 {
-                    b.Property<int>("SlaId")
+                    b.Property<int?>("SlaId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SlaId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("SlaId"));
 
                     b.Property<DateTime>("LastModified")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("SlaAnniversary")
-                        .HasColumnType("bit");
+                    b.Property<string>("SlaAnniversary")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("SlaEscalationDays")
                         .HasColumnType("int");
